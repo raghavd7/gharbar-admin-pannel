@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 const CATALYST_BASE = process.env.CATALYST_BASE || 'https://auth-token-reg-60069906069.development.catalystserverless.in/server';
 
 export async function GET(req: NextRequest) {

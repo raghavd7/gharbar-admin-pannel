@@ -58,6 +58,7 @@ export default function ProductSyncPage() {
     const p = products.find(pt => String(pt.id) === String(id));
     if (!p) return;
     try {
+      console.log('syncing', p);
       const res = await fetch('/api/sync-inventory-images', {
         method: 'POST', headers: {'Content-Type':'application/json'},
         body: JSON.stringify({ item_id: p.id, name: p.name, sku: p.sku, description: p.description, price: p.price, stock: p.stock, unit: p.unit, item_category: p.item_category })
