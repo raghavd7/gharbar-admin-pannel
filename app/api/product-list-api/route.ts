@@ -6,7 +6,7 @@ const CATALYST_BASE = process.env.CATALYST_BASE || 'https://auth-token-reg-60069
 
 export async function GET(req: NextRequest) {
   try {
-    const res = await fetch(`${CATALYST_BASE}/product-list-api/`);
+    const res = await fetch(`${CATALYST_BASE}/all-product-detail`);
     const data = await res.json();
     return NextResponse.json(data, { status: res.status });
   } catch (err:any) {
