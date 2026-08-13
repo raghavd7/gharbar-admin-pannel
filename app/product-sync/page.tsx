@@ -59,6 +59,7 @@ export default function ProductSyncPage() {
       name: p.name,
       sku: p.sku,
       description: p.description,
+      highlights: p.highlights ?? p.highlight ?? p.highlights_text ?? p.highlights_html ?? null,
       price: p.price,
       stock: p.stock,
       unit: p.unit,
