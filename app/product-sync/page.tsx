@@ -53,18 +53,20 @@ export default function ProductSyncPage() {
     return 'pending';
   }
 
-  function buildSyncPayload(p: Product) {
+  function getSyncPayload(p: Product) {
     return {
       item_id: p.id,
       name: p.name,
       sku: p.sku,
       description: p.description,
-      highlights: p.highlights ?? p.highlight ?? p.highlights_text ?? p.highlights_html ?? null,
       price: p.price,
       stock: p.stock,
       unit: p.unit,
       item_category: p.item_category,
-      show_on_website: p.show_on_website ?? p.showOnWebsite,
+      show_on_website: p.show_on_website,
+      status: p.status,
+      highlights: p.highlights,
+      composite_items_details: p.composite_items_details,
     };
   }
 
@@ -76,7 +78,7 @@ export default function ProductSyncPage() {
       console.log('syncing', p);
       const res = await fetch('/api/sync-inventory-images', {
         method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(buildSyncPayload(p))
+        body: JSON.stringify(getSyncPayload(p))
       });
       const data = await res.json();
       if (data.status === 'success' || data.status === 'already_synced') {
@@ -102,7 +104,7 @@ export default function ProductSyncPage() {
     for (const p of toSync) {
       setProgress(pr => ({ ...pr, label: `Syncing ${p.name}` }));
       try {
-        const res = await fetch('/api/sync-inventory-images', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(buildSyncPayload(p)) });
+        const res = await fetch('/api/sync-inventory-images', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(getSyncPayload(p)) });
         const data = await res.json();
         if (data.status === 'success' || data.status === 'already_synced') {
           setImageMap(m => ({ ...m, [String(p.id)]: { file_id: data.file_id, synced: true } }));
@@ -174,7 +176,7 @@ export default function ProductSyncPage() {
                   type="checkbox"
                   checked={selectAllChecked}
                   onChange={(event) => toggleSelectAll(event.target.checked)}
-                  disabled={isSyncing || pendingProducts.length === 0}
+                  disabled={isSyncing}
                 />
               </th>
               <th style={{padding:8}}>Name</th>

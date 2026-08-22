@@ -7,7 +7,6 @@ const CATALYST_BASE = process.env.CATALYST_BASE || 'https://auth-token-reg-60069
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    console.log(body)
     const res = await fetch(`${CATALYST_BASE}/sync-inventory-images`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
