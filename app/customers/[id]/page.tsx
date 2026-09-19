@@ -20,7 +20,7 @@ type ApiResponse = {
 
 async function fetchCustomer(id: string): Promise<Customer | null> {
   const response = await fetch(
-    "https://auth-token-reg-60069906069.catalystserverless.in/server/list-customers",
+    "https://auth-token-reg-60069906069.development.catalystserverless.in/server/list-customers",
     { cache: "no-store" }
   );
   const data: ApiResponse = await response.json();

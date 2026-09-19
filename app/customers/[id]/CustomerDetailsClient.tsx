@@ -27,7 +27,7 @@ export default function CustomerDetailsClient({ customer }: { customer: Customer
     if (!id) return;
     setPreviewLabel(field.replace(/_/g, " "));
     setPreviewUrl(
-      `https://auth-token-reg-60069906069.catalystserverless.in/server/get-image-load-route?file_id=${encodeURIComponent(id)}`
+      `https://auth-token-reg-60069906069.development.catalystserverless.in/server/get-image-load-route?file_id=${encodeURIComponent(id)}`
     );
   }
 
