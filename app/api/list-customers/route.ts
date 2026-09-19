@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const response = await fetch(
-      "https://auth-token-reg-60069906069.development.catalystserverless.in/server/list-customers",
+      "https://auth-token-reg-60069906069.catalystserverless.in/server/list-customers",
       {
         cache: "no-store",
       }
